@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+    }
+
+    h1 {
+      color: #e63946;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #e63946;
+      color: white;
+    }
+
+    #yesBtn:hover {
+      background: #d62839;
+      transform: scale(1.05);
+    }
+
+    #noBtn {
+      background: #adb5bd;
+      color: #333;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .love-screen {
+      display: none;
+      text-align: center;
+    }
+
+    .love-screen h2 {
+      color: #e63946;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .hearts {
+      font-size: 30px;
+      animation: float 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-15px);
+      }
+    }
+
+    .background-hearts span {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 20px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(-10vh);
+      }
+      to {
+        transform: translateY(110vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-hearts" id="bgHearts"></div>
+
+  <div class="card" id="questionCard">
+    <h1>Do you want to be my Valentine? 💖</h1>
+    <div class="buttons">
+      <button id="yesBtn">Yes 💕</button>
+      <button id="noBtn">No 🙃</button>
+    </div>
+  </div>
+
+  <div class="card love-screen" id="loveCard">
+    <h2>I love you ❤️</h2>
+    <p class="hearts">💖 💘 💝 💕 💓 💞</p>
+    <p>You make my world beautiful 🌹</p>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const questionCard = document.getElementById('questionCard');
+    const loveCard = document.getElementById('loveCard');
+
+    noBtn.addEventListener('mouseenter', () => {
+      const card = document.querySelector('.card');
+      const cardRect = card.getBoundingClientRect();
+
+      const maxX = cardRect.width - noBtn.offsetWidth;
+      const maxY = cardRect.height - noBtn.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noBtn.style.left = randomX + 'px';
+      noBtn.style.top = randomY + 'px';
+    });
+
+    yesBtn.addEventListener('click', () => {
+      questionCard.style.display = 'none';
+      loveCard.style.display = 'block';
+    });
+
+    // Background floating hearts
+    const bgHearts = document.getElementById('bgHearts');
+
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('span');
+      heart.innerHTML = '❤';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 5 + Math.random() * 5 + 's';
+      heart.style.fontSize = 15 + Math.random() * 30 + 'px';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      bgHearts.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
